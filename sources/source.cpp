@@ -6,6 +6,7 @@
 #include <vector>
 #include <chrono>
 #include <cmath>
+#include <random>
 
 int const &ret(int const &value) {
     return value;
@@ -37,9 +38,10 @@ void forward(const std::vector<int> &sizes) {
     std::cout << "forward: " << std::endl;
     for (auto &size : sizes) {
         int *arr = new int[size];
-        srand(static_cast<unsigned int>(time(0)));
+        std::mt19937 rand(time(0));
+        std::uniform_int_distribution<> dist(0, 32767);
         for (int j = 0; j < size; ++j) {
-            arr[j] = rand() % 1000 - 0;
+            arr[j] = dist(rand);
         }
         for (int j = 0; j < size; j += 16) {
             ret(arr[j]);
@@ -65,9 +67,10 @@ void backward(const std::vector<int> &sizes) {
     std::cout << "backward: " << std::endl;
     for (auto &size : sizes) {
         int *arr = new int[size];
-        srand(static_cast<unsigned int>(time(0)));
+        std::mt19937 rand(time(0));
+        std::uniform_int_distribution<> dist(0, 32767);
         for (int j = 0; j < size; ++j) {
-            arr[j] = rand() % (size) - 0;
+            arr[j] = dist(rand);
         }
         for (int j = size; j > 0; j -= 16) {
             ret(arr[j]);
@@ -93,10 +96,10 @@ void random(const std::vector<int> &sizes) {
     std::cout << "random: " << std::endl;
     for (auto &size : sizes) {
         int *arr = new int[size];
-        srand(static_cast<unsigned int>(time(0)));
-        srand(static_cast<unsigned int>(time(0)));
+        std::mt19937 rand(time(0));
+        std::uniform_int_distribution<> dist(0, 32767);
         for (int j = 0; j < size / 16; ++j) {
-            ret(arr[rand() % (size) - 0]);
+            arr[j] = dist(rand);
         }
         srand(static_cast<unsigned int>(time(0)));
         auto start2 = std::chrono::steady_clock::now();
