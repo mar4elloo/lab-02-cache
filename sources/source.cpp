@@ -39,7 +39,7 @@ void forward(const std::vector<int> &sizes) {
         int *arr = new int[size];
         srand(static_cast<unsigned int>(time(0)));
         for (int j = 0; j < size; ++j) {
-            arr[j] = rand_r();
+            arr[j] = rand();
         }
         for (int j = 0; j < size; j += 16) {
             ret(arr[j]);
@@ -67,7 +67,7 @@ void backward(const std::vector<int> &sizes) {
         int *arr = new int[size];
         srand(static_cast<unsigned int>(time(0)));
         for (int j = 0; j < size; ++j) {
-            arr[j] = rand_r();
+            arr[j] = rand();
         }
         for (int j = size; j > 0; j -= 16) {
             ret(arr[j]);
